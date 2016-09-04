@@ -52,7 +52,7 @@ public class Layout{
                 else {
                     label.setText(String.valueOf(Main2048.gameBoard.getValueOfTile(j,i)));
                 }
-                label.setStyle("-fx-font: 20 arial;" + "-fx-background-color: #F3F1F1;" + "-fx-border-color: #000000;");
+                label.setStyle(Main2048.tileCSS + "-fx-background-color: #F3F1F1;");
                 label.setMinSize(Main2048.tileSize,Main2048.tileSize);
                 label.setMaxSize(Main2048.tileSize,Main2048.tileSize);
                 label.setAlignment(Pos.CENTER);
@@ -65,28 +65,28 @@ public class Layout{
 
     private static void updateLabelColor(Label label , int value){
         if(value == 0){
-            label.setStyle("-fx-background-color: #F2F2F2;");
+            label.setStyle(Main2048.tileCSS + "-fx-background-color: #F2F2F2;");
         }
         else if(value == 2){
-            label.setStyle("-fx-background-color: #E9E9E9;");
+            label.setStyle(Main2048.tileCSS + "-fx-background-color: #E9E9E9;");
         }
         else if(value == 4){
-            label.setStyle("-fx-background-color: #D6C29F;");
+            label.setStyle(Main2048.tileCSS + "-fx-background-color: #D6C29F;");
         }
         else if(value == 8){
-            label.setStyle("-fx-background-color: #E88937;");
+            label.setStyle(Main2048.tileCSS + "-fx-background-color: #E88937;");
         }
         else if(value == 16){
-            label.setStyle("-fx-background-color: #CF511A;");
+            label.setStyle(Main2048.tileCSS + "-fx-background-color: #CF511A;");
         }
         else if(value == 32){
-            label.setStyle("-fx-background-color: #C93333;");
+            label.setStyle(Main2048.tileCSS + "-fx-background-color: #C93333;");
         }
         else if(value == 64){
-            label.setStyle("-fx-background-color: #FF0000;");
+            label.setStyle(Main2048.tileCSS + "-fx-background-color: #FF0000;");
         }
         else if(value > 64){
-            label.setStyle("-fx-background-color: #FFE205;");
+            label.setStyle(Main2048.tileCSS + "-fx-background-color: #FFE205;");
         }
     }
 

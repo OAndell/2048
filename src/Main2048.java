@@ -14,6 +14,7 @@ public class Main2048 extends Application{
     public static int boardSizeX = 4;
     public static int boardSizeY = 4;
     public static int tileSize = 50;
+    public static String tileCSS = "-fx-font: 20 arial;" +  "-fx-border-color: #000000;";
 
     public static void main(String[] args) {
         launch(args);
