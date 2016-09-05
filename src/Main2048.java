@@ -11,8 +11,8 @@ public class Main2048 extends Application{
     public static GameBoard gameBoard;
 
     //Static variables
-    public static int boardSizeX = 4;
-    public static int boardSizeY = 4;
+    public static int boardSizeX = 8;
+    public static int boardSizeY = 8;
     public static int tileSize = 50;
     public static String tileCSS = "-fx-font: 20 arial;" +  "-fx-border-color: #000000;";
 
@@ -38,10 +38,10 @@ public class Main2048 extends Application{
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
 
-                    case W:    gameBoard.moveUp(); Layout.updateTiles(); break;
-                    case S:     gameBoard.moveDown(); Layout.updateTiles(); break;
-                    case D:     gameBoard.moveRight(); Layout.updateTiles(); break;
-                    case A:      gameBoard.moveLeft(); Layout.updateTiles(); break;
+                    case W:    gameBoard.moveU(); Layout.updateTiles(); break;
+                    case S:     gameBoard.moveD(); Layout.updateTiles(); break;
+                    case D:     gameBoard.moveR(); Layout.updateTiles(); break;
+                    case A:      gameBoard.moveL(); Layout.updateTiles(); break;
                 }
             }
         });

@@ -65,19 +65,20 @@ public class GameBoard{
     }
 
     public void moveRight(){
-        for (int i = 0; i < tiles.size(); i++) {
-            for (int j = 0; j < tiles.get(i).size(); j++) {
-                if(j != boardsizeX-1) {
-                    int nextTile = j+1;
-                    if (isSameNumber(tiles.get(i).get(j), tiles.get(i).get(nextTile)) && !isUnmovable(i, j)) {
-                        tiles.get(i).set(nextTile, tiles.get(i).get(j) + tiles.get(i).get(nextTile));
-                        tiles.get(i).set(j, emptyTile);
-                        Integer unMovableTile[] = {i, nextTile};
-                        notMoveList.add(unMovableTile);
-                    }
-                    else if(tiles.get(i).get(nextTile) == emptyTile){
-                        tiles.get(i).set(nextTile, tiles.get(i).get(j));
-                        tiles.get(i).set(j, emptyTile);
+        for (int k = 0; k < boardsizeX; k++) {
+            for (int i = 0; i < tiles.size(); i++) {
+                for (int j = 0; j < tiles.get(i).size(); j++) {
+                    if (j != boardsizeX - 1) {
+                        int nextTile = j + 1;
+                        if (isSameNumber(tiles.get(i).get(j), tiles.get(i).get(nextTile)) && !isUnmovable(i, j)) {
+                            tiles.get(i).set(nextTile, tiles.get(i).get(j) + tiles.get(i).get(nextTile));
+                            tiles.get(i).set(j, emptyTile);
+                            Integer unMovableTile[] = {i, nextTile};
+                            notMoveList.add(unMovableTile);
+                        } else if (tiles.get(i).get(nextTile) == emptyTile) {
+                            tiles.get(i).set(nextTile, tiles.get(i).get(j));
+                            tiles.get(i).set(j, emptyTile);
+                        }
                     }
                 }
             }
@@ -89,63 +90,137 @@ public class GameBoard{
 
 
     public void moveLeft(){
-        for (int i = boardsizeY-1; -1 < i; i--) {
-            for (int j = boardsizeX-1; -1 < j; j--) {
-                if(j != 0) {
-                    int nextTile = j - 1;
-                    if (isSameNumber(tiles.get(i).get(j), tiles.get(i).get(nextTile)) && !isUnmovable(i, j)) {
-                        tiles.get(i).set(nextTile, tiles.get(i).get(j) + tiles.get(i).get(nextTile));
-                        tiles.get(i).set(j, emptyTile);
-                        Integer unMovableTile[] = {i, nextTile};
-                        notMoveList.add(unMovableTile);
-                    }
-                    if (tiles.get(i).get(nextTile) == emptyTile) {
-                        tiles.get(i).set(nextTile, tiles.get(i).get(j));
-                        tiles.get(i).set(j, emptyTile);
+        for (int k = 0; k < boardsizeX; k++) {
+            for (int i = boardsizeY - 1; -1 < i; i--) {
+                for (int j = boardsizeX - 1; -1 < j; j--) {
+                    if (j != 0) {
+                        int nextTile = j - 1;
+                        if (isSameNumber(tiles.get(i).get(j), tiles.get(i).get(nextTile)) && !isUnmovable(i, j)) {
+                            tiles.get(i).set(nextTile, tiles.get(i).get(j) + tiles.get(i).get(nextTile));
+                            tiles.get(i).set(j, emptyTile);
+                            Integer unMovableTile[] = {i, nextTile};
+                            notMoveList.add(unMovableTile);
+                        }
+                        if (tiles.get(i).get(nextTile) == emptyTile) {
+                            tiles.get(i).set(nextTile, tiles.get(i).get(j));
+                            tiles.get(i).set(j, emptyTile);
+                        }
                     }
                 }
             }
         }
         notMoveList.clear();
+        generateNewTile();
+    }
+
+    public void moveR(){
+        for (int completed = 0; completed < boardsizeX; completed++) {
+            for (int i = tiles.size() - 1; -1 < i; i--) {
+                for (int j = tiles.get(i).size() - 1; 0 < j; j--) {
+                    int nextTile = j - 1;
+                    if (isSameNumber((tiles.get(i).get(j)), tiles.get(i).get(nextTile))) {
+                        tiles.get(i).set(j, tiles.get(i).get(j) + tiles.get(i).get(nextTile));
+                        tiles.get(i).set(nextTile, emptyTile);
+                    } else if (tiles.get(i).get(j) == emptyTile) {
+                        tiles.get(i).set(j, tiles.get(i).get(nextTile));
+                        tiles.get(i).set(nextTile, emptyTile);
+                    }
+                }
+            }
+        }
+        generateNewTile();
+    }
+    public void moveL(){
+        for (int completed = 0; completed < boardsizeX; completed++) {
+            for (int i = tiles.size() - 1; -1 < i; i--) {
+                for (int j = 0; j < boardsizeX-1; j++) {
+                    int nextTile = j + 1;
+                    if (isSameNumber((tiles.get(i).get(j)), tiles.get(i).get(nextTile))) {
+                        tiles.get(i).set(j, tiles.get(i).get(j) + tiles.get(i).get(nextTile));
+                        tiles.get(i).set(nextTile, emptyTile);
+                    } else if (tiles.get(i).get(j) == emptyTile) {
+                        tiles.get(i).set(j, tiles.get(i).get(nextTile));
+                        tiles.get(i).set(nextTile, emptyTile);
+                    }
+                }
+            }
+        }
+        generateNewTile();
+    }
+    public void moveD(){
+        for (int completed = 0; completed < boardsizeY; completed++) {
+            for (int i = tiles.size() - 1; 0 < i; i--) {
+                for (int j = 0; j < boardsizeX; j++) {
+                    int nextTile = i -1;
+                    if (isSameNumber((tiles.get(i).get(j)), tiles.get(nextTile).get(j))) {
+                        tiles.get(i).set(j, tiles.get(i).get(j) + tiles.get(nextTile).get(j));
+                        tiles.get(nextTile).set(j, emptyTile);
+                    } else if (tiles.get(i).get(j) == emptyTile) {
+                        tiles.get(i).set(j, tiles.get(nextTile).get(j));
+                        tiles.get(nextTile).set(j, emptyTile);
+                    }
+                }
+            }
+        }
+        generateNewTile();
+    }
+    public void moveU(){
+       for (int k = 0;  k < boardsizeY;  k++) {
+            for (int i = 0; i < boardsizeY-1; i++) {
+                for (int j = 0; j < boardsizeX; j++) {
+                    int nextTile = i  + 1;
+                    if (isSameNumber((tiles.get(i).get(j)), tiles.get(nextTile).get(j))) {
+                        tiles.get(i).set(j, tiles.get(i).get(j) + tiles.get(nextTile).get(j));
+                        tiles.get(nextTile).set(j, emptyTile);
+                    } else if (tiles.get(i).get(j) == emptyTile) {
+                        tiles.get(i).set(j, tiles.get(nextTile).get(j));
+                        tiles.get(nextTile).set(j, emptyTile);
+                    }
+                }
+           }
+        }
         generateNewTile();
     }
 
 
     public void moveDown(){
-        for (int i = 0; i < tiles.size(); i++) {
-            for (int j = 0; j < tiles.get(i).size(); j++) {
-                if(i != boardsizeY-1) {
-                    int nextTile = i+1;
-                    if (isSameNumber(tiles.get(i).get(j), tiles.get(nextTile).get(j)) && !isUnmovable(i, j)) {
-                        tiles.get(nextTile).set(j, tiles.get(i).get(j) + tiles.get(nextTile).get(j));
-                        tiles.get(i).set(j, emptyTile);
-                        Integer unMovableTile[] = {nextTile, j};
-                        notMoveList.add(unMovableTile);
-                    }
-                    else if(tiles.get(nextTile).get(j) == emptyTile){
-                        tiles.get(nextTile).set(j, tiles.get(i).get(j));
-                        tiles.get(i).set(j, emptyTile);
+        for (int k = 0; k < boardsizeY; k++) {
+            for (int i = 0; i < tiles.size(); i++) {
+                for (int j = 0; j < tiles.get(i).size(); j++) {
+                    if(i != boardsizeY-1) {
+                        int nextTile = i+1;
+                        if (isSameNumber(tiles.get(i).get(j), tiles.get(nextTile).get(j)) && !isUnmovable(i, j)) {
+                            tiles.get(nextTile).set(j, tiles.get(i).get(j) + tiles.get(nextTile).get(j));
+                            tiles.get(i).set(j, emptyTile);
+                            Integer unMovableTile[] = {nextTile, j};
+                            notMoveList.add(unMovableTile);
+                        }
+                        else if(tiles.get(nextTile).get(j) == emptyTile){
+                            tiles.get(nextTile).set(j, tiles.get(i).get(j));
+                            tiles.get(i).set(j, emptyTile);
+                        }
                     }
                 }
             }
-        }
+    }
         notMoveList.clear();
         generateNewTile();
     }
 
     public void moveUp(){
-        for (int i = boardsizeY-1; 0 < i; i--) {
-            for (int j = boardsizeX-1; -1 < j; j--) {
-                int nextTile = i-1;
-                if (isSameNumber(tiles.get(i).get(j), tiles.get(nextTile).get(j)) && !isUnmovable(i, j)) {
-                    tiles.get(nextTile).set(j, tiles.get(i).get(j) + tiles.get(nextTile).get(j));
-                    tiles.get(i).set(j, emptyTile);
-                    Integer unMovableTile[] = {nextTile, j};
-                    notMoveList.add(unMovableTile);
-                }
-                else if(tiles.get(nextTile).get(j) == emptyTile){
-                    tiles.get(nextTile).set(j, tiles.get(i).get(j));
-                    tiles.get(i).set(j, emptyTile);
+        for (int k = 0; k < boardsizeY; k++) {
+            for (int i = boardsizeY - 1; 0 < i; i--) {
+                for (int j = boardsizeX - 1; -1 < j; j--) {
+                    int nextTile = i - 1;
+                    if (isSameNumber(tiles.get(i).get(j), tiles.get(nextTile).get(j)) && !isUnmovable(i, j)) {
+                        tiles.get(nextTile).set(j, tiles.get(i).get(j) + tiles.get(nextTile).get(j));
+                        tiles.get(i).set(j, emptyTile);
+                        Integer unMovableTile[] = {nextTile, j};
+                        notMoveList.add(unMovableTile);
+                    } else if (tiles.get(nextTile).get(j) == emptyTile) {
+                        tiles.get(nextTile).set(j, tiles.get(i).get(j));
+                        tiles.get(i).set(j, emptyTile);
+                    }
                 }
             }
         }
