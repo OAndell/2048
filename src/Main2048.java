@@ -11,14 +11,13 @@ public class Main2048 extends Application{
     public static GameBoard gameBoard;
 
     //Static variables
-    public static int boardSizeX = 4;
-    public static int boardSizeY = 4;
-    public static int tileSize = 50;
-    public static int left = 0;
-    public static int right = 1;
-    public static int up = 2;
-    public static int down = 3;
-    public static String tileCSS = "-fx-font: 20 arial;" +  "-fx-border-color: #000000;";
+    private static int boardSizeX = 4;
+    private static int boardSizeY = 4;
+    private static int tileSize = 50;
+    private static int left = 0;
+    private static int right = 1;
+    private static int up = 2;
+    private static int down = 3;
 
     public static void main(String[] args) {
         launch(args);
@@ -50,8 +49,32 @@ public class Main2048 extends Application{
             }
         });
         primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         primaryStage.show();
     }
 
+    public static GameBoard getGameBoard(){
+        return gameBoard;
+    }
+    public static int getBoardSizeX() {
+        return boardSizeX;
+    }
+    public static int getBoardSizeY() {
+        return boardSizeY;
+    }
+    public static int getLeft(){
+        return left;
+    }
+    public static int getDown() {
+        return down;
+    }
+    public static int getRight() {
+        return right;
+    }
+    public static int getUp() {
+        return up;
+    }
+    public static int getTileSize() {
+        return tileSize;
+    }
 }

@@ -10,7 +10,7 @@ import java.util.Random;
 public class GameBoard{
 
     private ArrayList<ArrayList<Integer>> tiles = new ArrayList<ArrayList<Integer>>();
-    private ArrayList<Integer[]> notMoveList = new ArrayList<Integer[]>();
+
     private int boardsizeX;
     private int boardsizeY;
     private int left;
@@ -23,10 +23,10 @@ public class GameBoard{
     public GameBoard(int boardsizeX,int boardsizeY){
         this.boardsizeX = boardsizeX;
         this.boardsizeY = boardsizeY;
-        left = Main2048.left;
-        right = Main2048.right;
-        up = Main2048.up;
-        down = Main2048.down;
+        left = Main2048.getLeft();
+        right = Main2048.getRight();
+        up = Main2048.getUp();
+        down = Main2048.getDown();
         initialize();
         generateNewTile();
     }
@@ -127,7 +127,7 @@ public class GameBoard{
                     } else if (tiles.get(row).get(i) == emptyTile) {
                         tiles.get(row).set(i, tiles.get(row).get(nextTile));
                         tiles.get(row).set(nextTile, emptyTile);
-                        moveRow(right, row);
+                        moveRow(right,row);
                     }
                 }
             }
@@ -140,11 +140,10 @@ public class GameBoard{
                 } else if (tiles.get(row).get(j) == emptyTile) {
                     tiles.get(row).set(j, tiles.get(row).get(nextTile));
                     tiles.get(row).set(nextTile, emptyTile);
-                    moveRow(left, row); //calls rekursive function
+                    moveRow(left, row); //calls recursive function
                 }
             }
         }
-
     }
     private boolean isSameNumber(int x, int y){
         if(x == y){
@@ -168,7 +167,6 @@ public class GameBoard{
                 else{
                     System.out.print(" " + tiles.get(i).get(j) + "  ");
                 }
-
             }
             System.out.println("");
         }
